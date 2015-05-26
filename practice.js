@@ -50,9 +50,20 @@ user.getUsername();
 
 
 // Write the function definitions which will make the following function invocations function properly.
+var Car = function(make, model, year) {
+    return {
+        make: make,
+        model: model,
+        year: year,
+        moveCar: move,
+        move: 0
+    }
+}
 
-var moveCar = function() {
-    return this.move + 10;
+var move = function() {
+    var newMove = this.move + 10;
+    this.move = newMove;
+    return this.move;
 }
 
 var prius = Car('Toyota', 'Prius', 2011);
@@ -61,9 +72,7 @@ var mustang = Car('Ford', 'Mustang', 2013);
 prius.moveCar(); //increments prius' move property by 10. Returns the new move property.
 mustang.moveCar(); //increments prius' move property by 10. Returns the new move property.
 
-//Hint, you'll need to write a moveCar function which is added to every object that is being returned from the Car function. You'll also need to use the 'this' keyword properly in order to make sure you're invoking move on the write object (prius vs mustang).
-
-
+//Hint, you'll need to write a moveCar function which is added to every object that is being returned from the Car function. You'll also need to use the 'this' keyword properly in order to make sure you're invoking moveCar on the right object (prius vs mustang).
 
 //Continuation of previous problem
 
@@ -75,8 +84,8 @@ var getYear = function(){
 
   //Code Here
 
-prius.getYear();
-mustang.getYear();
+getYear.call(prius);
+getYear.call(mustang);
 
 //New Problem
 
@@ -87,18 +96,16 @@ var user = {
 };
 
 var getUsername = function(){
-  return this.username;
+  console.log(this.username);
 };
-
-setTimeout(getUsername, 5000);
 
 //Above you're given an object, a function, and a setTimeout invocation. After 5 seconds, what will the getUsername function return?
 
-  //The function definition
+  //The window object
 
 //In the example above, what is the 'this keyword' bound to when getUsername runs?
 
   //Nothing
 
 //Fix the setTimeout invocation so that the user object will be the focal object when getUsername is ran.
-setTimeout(getUsername, 5000);
+setTimeout(getUsername.call(user), 5000);
