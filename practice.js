@@ -39,15 +39,13 @@
         username: 'ShawnChambless',
         email: 'shawn.chambless@gmail.com',
         getUsername: function(){
-            return this.username
+            return this.username;
         }
-    }
+    };
 
 //Now, invoke the getUsername method and verify you got the username of the object and not anything else.
 
-
 user.getUsername();
-
 
 // Write the function definitions which will make the following function invocations function properly.
 var Car = function(make, model, year) {
@@ -108,4 +106,4 @@ var getUsername = function(){
   //Nothing
 
 //Fix the setTimeout invocation so that the user object will be the focal object when getUsername is ran.
-setTimeout(getUsername.call(user), 5000);
+setTimeout(getUsername.bind(user), 5000);
